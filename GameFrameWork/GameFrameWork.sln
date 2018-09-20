@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameFrameWork", "GameFrameW
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PP05.AnimatingSprite", "..\PP05.AnimatingSprite\PP05.AnimatingSprite.vcxproj", "{CB2E0A24-4BFC-499B-BECE-4973F693284E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PP06.ImageSprite", "PP06.ImageSprite\PP06.ImageSprite.vcxproj", "{7079B4DB-7024-4C29-8BF5-8B047FB0629E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{CB2E0A24-4BFC-499B-BECE-4973F693284E}.Release|x64.Build.0 = Release|x64
 		{CB2E0A24-4BFC-499B-BECE-4973F693284E}.Release|x86.ActiveCfg = Release|Win32
 		{CB2E0A24-4BFC-499B-BECE-4973F693284E}.Release|x86.Build.0 = Release|Win32
+		{7079B4DB-7024-4C29-8BF5-8B047FB0629E}.Debug|x64.ActiveCfg = Debug|x64
+		{7079B4DB-7024-4C29-8BF5-8B047FB0629E}.Debug|x64.Build.0 = Debug|x64
+		{7079B4DB-7024-4C29-8BF5-8B047FB0629E}.Debug|x86.ActiveCfg = Debug|Win32
+		{7079B4DB-7024-4C29-8BF5-8B047FB0629E}.Debug|x86.Build.0 = Debug|Win32
+		{7079B4DB-7024-4C29-8BF5-8B047FB0629E}.Release|x64.ActiveCfg = Release|x64
+		{7079B4DB-7024-4C29-8BF5-8B047FB0629E}.Release|x64.Build.0 = Release|x64
+		{7079B4DB-7024-4C29-8BF5-8B047FB0629E}.Release|x86.ActiveCfg = Release|Win32
+		{7079B4DB-7024-4C29-8BF5-8B047FB0629E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
