@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include <map>
 
+
 class TextureManager
 {
 public:
@@ -22,5 +23,16 @@ public:
 		SDL_Renderer* pRenderer,
 		SDL_RendererFlip flip = SDL_FLIP_NONE);
 
+	// 함수 추가
+	static TextureManager* Instance();
+
+	//유일객체 디자인패턴을 위한 코드 수정, 기존 코드 중 불필요한 코드 제거 
+	//  생성자 조정 
 private:
+	TextureManager() {}
+	
+	
 };
+
+// type  추가
+typedef TextureManager TheTextureManager;
