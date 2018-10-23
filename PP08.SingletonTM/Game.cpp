@@ -13,7 +13,20 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 		m_bRunning = true;
 
-		SDL_Surface* pTempSurface = SDL_LoadBMP("Assets/animate.bmp");
+		SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
+
+		//m_textureManager.load("Assets/animate-alpha.png", "animate", m_pRenderer);
+		if (!TheTextureManager::Instance()->load("assets/animate-alpha.png",
+			"animate", m_pRenderer))
+		{
+			return false;
+		}
+
+		//m_textureManager.load("Assets/animate-alpha.png", "animate2", m_pRenderer);
+
+		/*SDL_Surface* pTempSurface = IMG_Load("Assets/animate-alpha.png");
+
+
 		m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
 
 		SDL_FreeSurface(pTempSurface);
@@ -24,7 +37,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		m_destinationRectangle.x = m_sourceRectangle.x = 0;
 		m_destinationRectangle.y = m_sourceRectangle.y = 0;
 		m_destinationRectangle.w = m_sourceRectangle.w;
-		m_destinationRectangle.h = m_sourceRectangle.h;
+		m_destinationRectangle.h = m_sourceRectangle.h;*/
 
 
 	}
@@ -44,14 +57,25 @@ void Game::render()
 	// clear the renderer to the draw color
 	SDL_RenderClear(m_pRenderer);	// draw color로 render 지우기
 									// 원본 사각형과 대상 사각형의 위치와 크기에 따라 화면에 다르게 나타남...
-	SDL_RenderCopy(m_pRenderer, m_pTexture,
-		&m_sourceRectangle, &m_destinationRectangle);
+									//SDL_RenderCopy(m_pRenderer, m_pTexture,
+									//	&m_sourceRectangle, &m_destinationRectangle);
+
+	TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82,
+		m_pRenderer);
+
+	TheTextureManager::Instance()->drawFrame("animate", 100, 100,
+		128, 82, 1, m_currentFrame, m_pRenderer);
+
+	//m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
+	//m_textureManager.drawFrame("animate", 100, 100, 128, 82, 1, m_currentFrame, m_pRenderer);
+
+
 	SDL_RenderPresent(m_pRenderer);	// 화면 제시하기
 }
 
 void Game::update()
 {
-	m_sourceRectangle.x = 128 * int(((SDL_GetTicks() / 100) % 6));
+	m_currentFrame = int(((SDL_GetTicks() / 100) % 6));
 }
 
 void Game::clean()
@@ -71,9 +95,6 @@ void Game::handleEvents()
 		{
 		case SDL_QUIT:
 			m_bRunning = false;
-			break;
-		case SDL_KEYDOWN:
-			m_destinationRectangle.x++;
 			break;
 		default:
 			break;
