@@ -4,13 +4,6 @@
 #include <SDL_image.h>
 #include "SDL.h"
 #include "TextureManager.h"
-#include "GameObject.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Monster.h"
-#include <vector>
-
-
 
 class Game
 {
@@ -26,7 +19,6 @@ public:
 	bool running() { return m_bRunning; }
 
 
-
 private:
 	SDL_Window * m_pWindow;
 	SDL_Renderer* m_pRenderer;
@@ -34,17 +26,8 @@ private:
 	//SDL_Rect m_sourceRectangle;			// 원본 사각형
 	//SDL_Rect m_destinationRectangle;	// 대상 사각형
 
-	std::vector<GameObject*> m_gameObjects;
-
-	GameObject* m_go;
-	GameObject* m_player;
-	GameObject* m_enemy;
-	GameObject* m_monster1;
-	GameObject* m_monster2;
-
-
-
-	int m_currentFrame;
+	int m_currentFrame1;
+	int m_currentFrame2;
 	TextureManager* m_textureManager;
 
 	bool m_bRunning;

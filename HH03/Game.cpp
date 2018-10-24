@@ -13,39 +13,26 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 		m_bRunning = true;
 
-		SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
+		SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 
-		
-		if (!TheTextureManager::Instance()->load("assets/animate_Right-alpha.png",
-			"animate_right", m_pRenderer))		// 오른쪽으로 이동하는 스프라이트 이미지를 추가
-		{
-			return false;
-		}
-		if (!TheTextureManager::Instance()->load("assets/animate_Left-alpha.png",
-			"animate_left", m_pRenderer))		// 왼쪽으로 이동하는 스프라이트 이미지를 추가.
+		//m_textureManager.load("Assets/animate-alpha.png", "animate", m_pRenderer);
+		if (!TheTextureManager::Instance()->load("assets/animate-alpha.png",
+			"animate", m_pRenderer))
 		{
 			return false;
 		}
 
-		m_go = new GameObject();
-		m_player = new Player();
-		m_enemy = new Enemy();
-		// 추가한 몬스터 객체
-		m_monster1 = new Monster(2, 200, 100);	// 속도 2, 좌우 이동 거리 200, 프레임 변환 속도 100
-		m_monster2 = new Monster(5, 400, 60);	// 속도 5, 좌우 이동 거리 400, 프레임 변환 속도 60
+		if (!TheTextureManager::Instance()->load("assets/tree.png",
+			"tree", m_pRenderer))
+		{
+			return false;
+		}
 
-		m_go->load(100, 100, 128, 82, "animate_right");
-		m_player->load(300, 300, 128, 82, "animate_right");
-		m_enemy->load(100, 300, 128, 82, "animate_right");
-		m_monster1->load(100, 200, 128, 82, "animate_right");
-		m_monster2->load(100, 300, 128, 82, "animate_right");
-
-		// 게임 오브젝트 배열에 각 게임 오브젝트를 추가
-		m_gameObjects.push_back(m_go);
-		m_gameObjects.push_back(m_player);
-		m_gameObjects.push_back(m_enemy);
-		m_gameObjects.push_back(m_monster1);
-		m_gameObjects.push_back(m_monster2);
+		if (!TheTextureManager::Instance()->load("assets/Bell.png",
+			"bell", m_pRenderer))
+		{
+			return false;
+		}
 
 		//m_textureManager.load("Assets/animate-alpha.png", "animate2", m_pRenderer);
 
@@ -85,28 +72,25 @@ void Game::render()
 									//SDL_RenderCopy(m_pRenderer, m_pTexture,
 									//	&m_sourceRectangle, &m_destinationRectangle);
 
-	for (std::vector<GameObject*>::size_type i = 0;
-		i != m_gameObjects.size(); i++)
-	{
-		m_gameObjects[i]->draw(m_pRenderer);
-	}
-
-
-	/*m_go.draw(m_pRenderer);
-	m_player.draw(m_pRenderer);*/
-
-
-	/*TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82,
-	m_pRenderer);
+	/*TheTextureManager::Instance()->drawFrame("animate", 0, 0,
+		128, 82, 1, m_currentFrame1, m_pRenderer);
 
 	TheTextureManager::Instance()->drawFrame("animate", 100, 100,
-	128, 82, 1, m_currentFrame, m_pRenderer);*/
+		128, 82, 1, m_currentFrame2, m_pRenderer);*/
 
+	//TheTextureManager::Instance()->draw("tree", 100, 0, 500, 500, m_pRenderer);
+	//TheTextureManager::Instance()->draw("Bell", 100, 100, 500, 500, m_pRenderer);
+
+	TheTextureManager::Instance()->drawFrame("bell", 0, 100,
+		500, 500, 1, m_currentFrame2, m_pRenderer);
+
+	TheTextureManager::Instance()->drawFrame("tree", 100, 0,
+		500, 500, 1, m_currentFrame1, m_pRenderer);
+
+	
 
 	//m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
 	//m_textureManager.drawFrame("animate", 100, 100, 128, 82, 1, m_currentFrame, m_pRenderer);
-
-
 
 
 	SDL_RenderPresent(m_pRenderer);	// 화면 제시하기
@@ -114,16 +98,8 @@ void Game::render()
 
 void Game::update()
 {
-	//m_currentFrame = int(((SDL_GetTicks() / 100) % 6));
-
-	//m_go.update();
-	//m_player.update();
-
-	for (std::vector<GameObject*>::size_type i = 0;
-		i != m_gameObjects.size(); i++)
-	{
-		m_gameObjects[i]->update();
-	}
+	m_currentFrame1 = int(((SDL_GetTicks() / 100) % 3));
+	m_currentFrame2 = int(((SDL_GetTicks() / 150) % 4));
 }
 
 void Game::clean()
