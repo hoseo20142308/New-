@@ -1,18 +1,12 @@
 #include "Enemy.h"
 
-void Enemy::load(int x, int y, int width, int height,
-	std::string textureID)
+Enemy::Enemy(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
-	GameObject::load(x, y, width, height, textureID);
-	// 이 코드가 의미가 있을까? 이코드가 없었다면, 자동으로 부모 호출?? 
 }
-
-void Enemy::draw(SDL_Renderer* pRenderer)
+void Enemy::draw()
 {
-	GameObject::draw(pRenderer);
-	// 이 코드가 의미가 있을까? 이코드가 없었다면, 자동으로 부모 호출?? 
+	SDLGameObject::draw(); // we now use SDLGameObject
 }
-
 void Enemy::update()
 {
 	m_y += 1;

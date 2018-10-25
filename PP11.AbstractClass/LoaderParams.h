@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include "TextureManager.h"
 
 class LoaderParams
 {
