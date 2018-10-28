@@ -26,10 +26,9 @@ public:
 	static Game* Instance();
 
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
-	
 
 private:
-	Game();
+	Game() {};
 
 	// create the s_pInstance member variable
 	static Game* s_pInstance;
