@@ -80,14 +80,6 @@ void Game::clean()
 	SDL_Quit();
 }
 
-void Game::quit()
-{
-	std::cout << "cleaning game\n";
-	SDL_DestroyWindow(m_pWindow);
-	SDL_DestroyRenderer(m_pRenderer);
-	SDL_Quit();
-}
-
 void Game::handleEvents()
 {
 	TheInputHandler::Instance()->update();

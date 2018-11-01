@@ -31,7 +31,7 @@ void InputHandler::update()
 
 		if (event.type == SDL_QUIT)
 		{
-			TheGame::Instance()->quit();
+			TheGame::Instance()->clean();
 		}
 	}
 }
