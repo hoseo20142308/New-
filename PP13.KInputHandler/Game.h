@@ -7,6 +7,7 @@
 #include "SDLGameObject.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "InputHandler.h"
 #include <vector>
 
 
