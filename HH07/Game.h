@@ -7,6 +7,8 @@
 #include "SDLGameObject.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Ball.h"
+#include "Wall.h"
 #include "InputHandler.h"
 #include <vector>
 
@@ -23,6 +25,7 @@ public:
 	void handleEvents();
 	void clean();
 	void quit();
+	void createGameObject_ball(Ball* ball);
 	bool running() { return m_bRunning; }
 
 	static Game* Instance();
@@ -30,6 +33,7 @@ public:
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
 	//std::vector<SDLGameObject*> getGameobjects() const { return m_gameObjects; }
 	std::vector<SDLGameObject*> m_gameObjects;
+	vector<Ball*> Balls;
 
 private:
 	Game() {};

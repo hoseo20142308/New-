@@ -10,7 +10,16 @@ public:
 	virtual void draw();
 	virtual void update();
 	virtual void clean() {};
+	int getAtk() { return attackPoint; }
+	SDL_Rect getRect() { return rect; }
+
 private:
+	
+
+	const int attackPoint = 3;
+	SDL_Rect rect;
+
+	void setRect();
 	
 };
 

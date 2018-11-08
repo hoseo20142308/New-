@@ -23,7 +23,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		{
 			return false;
 		}
-		if (!TheTextureManager::Instance()->load("ball.png",
+		if (!TheTextureManager::Instance()->load("assets/ball.png",
 			"ball", m_pRenderer))
 		{
 			return false;
@@ -36,7 +36,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 		m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
 		
-		m_gameObjects.push_back(new Enemy(new LoaderParams(300, 300, 128, 82, "animate")));
+		m_gameObjects.push_back(new Wall(new LoaderParams(400, 100, 128, 128, "wall")));
 
 
 	}
@@ -96,6 +96,11 @@ void Game::quit()
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();
+}
+
+void Game::createGameObject_ball(Ball* ball)
+{
+	m_gameObjects.push_back(ball);
 }
 
 void Game::handleEvents()
