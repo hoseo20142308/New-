@@ -40,9 +40,23 @@ void Player::handleInput()
 	{
 		m_velocity.setY(2);
 	}
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z))
+	{
+		shoot();
+	}
 }
 
 void Player::shoot()
 {
+	inputTime = SDL_GetTicks();		// 입력 했을 때의 시간
 	
+	if (inputTime - shootTime > shootRate)	// 입력 시 시간 - 발사 시 시간 > 공격속도 일때
+	{	
+		Ball* tempBall = new Ball(new LoaderParams(m_position.GetX() + 100, m_position.GetY(),
+									128, 128, "ball"));
+		
+		TheGame::Instance()->createGameObject_ball( tempBall );		// 게임오브젝트를 Game클래스의 m_GameObjects에 추가
+		TheGame::Instance()->Balls.push_back(tempBall);
+		shootTime = SDL_GetTicks();	// 발사 했을 때의 시간
+	}
 }

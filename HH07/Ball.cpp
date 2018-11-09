@@ -9,14 +9,24 @@ void Ball::draw()
 }
 void Ball::update()
 {
-	m_velocity.setX(1);
+	m_velocity.setX(10);
 	m_velocity.setY(0);
 	
 
-	m_currentFrame = int(((SDL_GetTicks() / 100) % 6));
+	m_currentFrame = int(((SDL_GetTicks() / 100) % 1));
+
+	setRect();
 
 
 	SDLGameObject::update();
+}
+
+void Ball::setRect()
+{
+	rect.x = m_position.GetX();
+	rect.y = m_position.GetY();
+	rect.w = m_width;
+	rect.h = m_height;
 }
 
 /*void Player::handleInput()
