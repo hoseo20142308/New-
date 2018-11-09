@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "Game.h"
 
+std::vector<SDLGameObject*> m_gameObjects = TheGame::Instance().;
+
 Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
 }

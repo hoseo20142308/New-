@@ -28,8 +28,8 @@ public:
 	static Game* Instance();
 
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
-	//std::vector<SDLGameObject*> getGameobjects() const { return m_gameObjects; }
-	std::vector<SDLGameObject*> m_gameObjects;
+	std::vector<SDLGameObject*> getGameobjects() const { return m_gameObjects; }
+	
 
 private:
 	Game() {};
@@ -37,7 +37,7 @@ private:
 	// create the s_pInstance member variable
 	static Game* s_pInstance;
 
-	
+	std::vector<SDLGameObject*> m_gameObjects;
 
 	SDL_Window * m_pWindow;
 
