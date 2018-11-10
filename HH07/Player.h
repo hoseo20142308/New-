@@ -14,8 +14,8 @@ public:
 
 private:
 	void handleInput();
-	void shoot();
-	const float shootRate = 500.0f;
-	Uint32 inputTime;
-	Uint32 shootTime = 0.0f;
+	void shoot();					// 공을 쏠 때 사용할 함수
+	const float shootRate = 500.0f;	// 공 발사 속도
+	Uint32 inputTime;				// 공 발사시 입력 시간
+	Uint32 shootTime = 0.0f;		// 공 발사시 시간
 };

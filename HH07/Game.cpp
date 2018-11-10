@@ -23,11 +23,13 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		{
 			return false;
 		}
+		// ball 이란 이름으로 공 이미지를 로드 시킴
 		if (!TheTextureManager::Instance()->load("assets/ball.png",
 			"ball", m_pRenderer))
 		{
 			return false;
 		}
+		// wall 이란 이름으로 벽 이미지를 로드 시킴
 		if (!TheTextureManager::Instance()->load("assets/wall.png",
 			"wall", m_pRenderer))
 		{
@@ -36,6 +38,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 		m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
 		
+		// 벽 게임오브젝트 생성
 		m_gameObjects.push_back(new Wall(new LoaderParams(400, 100, 128, 128, "wall")));
 
 
