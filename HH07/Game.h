@@ -25,15 +25,14 @@ public:
 	void handleEvents();
 	void clean();
 	void quit();
-	void createGameObject_ball(Ball* ball);
+	void createGameObject_ball(Ball* ball);		// 공 생성 함수
 	bool running() { return m_bRunning; }
 
 	static Game* Instance();
 
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
-	//std::vector<SDLGameObject*> getGameobjects() const { return m_gameObjects; }
 	std::vector<SDLGameObject*> m_gameObjects;
-	vector<Ball*> Balls;
+	vector<Ball*> Balls;	// 공만 따로 충돌체크하기 위해서 담아두기 위한 vector
 
 private:
 	Game() {};

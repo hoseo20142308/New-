@@ -52,11 +52,13 @@ void Player::shoot()
 	
 	if (inputTime - shootTime > shootRate)	// 입력 시 시간 - 발사 시 시간 > 공격속도 일때
 	{	
+		// Ball 클래스 생성
 		Ball* tempBall = new Ball(new LoaderParams(m_position.GetX() + 100, m_position.GetY(),
 									128, 128, "ball"));
 		
+		// Ball 게임오브젝트 생성
 		TheGame::Instance()->createGameObject_ball( tempBall );		// 게임오브젝트를 Game클래스의 m_GameObjects에 추가
-		TheGame::Instance()->Balls.push_back(tempBall);
+		TheGame::Instance()->Balls.push_back(tempBall);				// 볼 만 따로 모아두는 vector Balls에 저장
 		shootTime = SDL_GetTicks();	// 발사 했을 때의 시간
 	}
 }
