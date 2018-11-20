@@ -57,6 +57,7 @@ void Player::shoot()
 									128, 128, "ball"));
 		
 		// Ball 게임오브젝트 생성
+		
 		TheGame::Instance()->createGameObject_ball( tempBall );		// 게임오브젝트를 Game클래스의 m_GameObjects에 추가
 		TheGame::Instance()->Balls.push_back(tempBall);				// 볼 만 따로 모아두는 vector Balls에 저장
 		shootTime = SDL_GetTicks();	// 발사 했을 때의 시간
