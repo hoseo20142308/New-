@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "InputHandler.h"
+#include "GameStateMachine.h"
 #include <vector>
 
 
@@ -31,6 +32,8 @@ public:
 
 private:
 	Game() {};
+
+	GameStateMachine* m_pGameStateMachine;
 
 	// create the s_pInstance member variable
 	static Game* s_pInstance;

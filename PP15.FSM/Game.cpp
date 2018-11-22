@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "MenuState.h"
+#include "PlayState.h"
 
 Game* Game::s_pInstance = 0;
 
@@ -12,6 +14,9 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		{
 			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 		}
+
+		m_pGameStateMachine = new GameStateMachine;
+		m_pGameStateMachine->changeState(MenuState::Instance());
 
 		m_bRunning = true;
 
@@ -44,16 +49,15 @@ void Game::render()
 {
 
 	// clear the renderer to the draw color
-	SDL_RenderClear(m_pRenderer);	// draw color로 render 지우기
-									// 원본 사각형과 대상 사각형의 위치와 크기에 따라 화면에 다르게 나타남...
-									//SDL_RenderCopy(m_pRenderer, m_pTexture,
-									//	&m_sourceRectangle, &m_destinationRectangle);
+	SDL_RenderClear(m_pRenderer);	
 	
 	for (std::vector<GameObject*>::size_type i = 0;
 		i != m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->draw();
 	}
+
+	m_pGameStateMachine->render();
 
 
 
@@ -69,6 +73,8 @@ void Game::update()
 	{
 		m_gameObjects[i]->update();
 	}
+
+	m_pGameStateMachine->update();
 }
 
 void Game::clean()
@@ -91,6 +97,10 @@ void Game::quit()
 void Game::handleEvents()
 {
 	TheInputHandler::Instance()->update();
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN))
+	{
+		m_pGameStateMachine->changeState(PlayState::Instance());
+	}
 }
 
 Game* Game::Instance()

@@ -73,6 +73,10 @@
     <IncludePath>C:\Users\user\source\repos\New실습\SDL2-2.0.8\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\user\source\repos\New실습\SDL2-2.0.8\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Users\kimsm\source\repos\hoseo20142308\New-\SDL2-2.0.8\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\kimsm\source\repos\hoseo20142308\New-\SDL2-2.0.8\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -92,6 +96,10 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
