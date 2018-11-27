@@ -65,3 +65,8 @@ TextureManager* TextureManager::Instance()
 	}
 	return s_pInstance;
 }
+
+void TextureManager::clearFromTextureMap(std::string id)
+{
+	m_textureMap.erase(id);
+}

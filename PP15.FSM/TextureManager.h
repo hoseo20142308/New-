@@ -26,6 +26,8 @@ public:
 	// 함수 추가
 	static TextureManager* Instance();
 
+	void clearFromTextureMap(std::string id);
+
 	//유일객체 디자인패턴을 위한 코드 수정, 기존 코드 중 불필요한 코드 제거 
 	//  생성자 조정 
 private:

@@ -1,6 +1,6 @@
 #include "Game.h"
 
-const int FPS = 30;
+const int FPS = 60;
 const int DELAY_TIME = 1000.0f / FPS;
 
 Uint32 frameStart, frameTime;
@@ -8,7 +8,7 @@ Uint32 frameStart, frameTime;
 int main(int argc, char* argv[])
 {
 	std::cout << "game init attempt...\n";
-	if (TheGame::Instance()->init("PP14.MInputHandler", 100, 100, 640, 480, false))
+	if (TheGame::Instance()->init("PP15.FSM", 100, 100, 640, 480, false))
 	{
 		
 		std::cout << "game init success!\n";

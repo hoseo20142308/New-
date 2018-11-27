@@ -15,6 +15,9 @@ public:
 private:
 	MenuState() {};
 
+	static void s_menuToPlay();
+	static void s_exitFromMenu();
+
 	static const std::string s_menuID;
 	static MenuState* s_pInstance;
 
