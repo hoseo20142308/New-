@@ -16,9 +16,26 @@ m_velocity(0.0f, 0.0f), m_acceleration(0.0f, 0.0f)
 
 void SDLGameObject::draw()
 {
-	TextureManager::Instance()->drawFrame(m_textureID, (int)m_position.GetX(), (int)m_position.GetY(),
+	/*TextureManager::Instance()->drawFrame(m_textureID, (int)m_position.GetX(), (int)m_position.GetY(),
 		m_width, m_height, m_currentRow, m_currentFrame,
-		TheGame::Instance()->getRenderer());
+		TheGame::Instance()->getRenderer());*/
+
+	if (m_velocity.GetX() > 0)
+	{
+		TextureManager::Instance()->drawFrame(m_textureID,
+			(Uint32)m_position.GetX(), (Uint32)m_position.GetY(),
+			m_width, m_height, m_currentRow, m_currentFrame,
+			TheGame::Instance()->getRenderer(),
+			SDL_FLIP_HORIZONTAL);
+	}
+	else 
+	{
+		TextureManager::Instance()->drawFrame(m_textureID,
+			(Uint32)m_position.GetX(), (Uint32)m_position.GetY(),
+			m_width, m_height, m_currentRow, m_currentFrame,
+			TheGame::Instance()->getRenderer());
+	}
+
 }
 
 void SDLGameObject::update()
