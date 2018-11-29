@@ -8,7 +8,7 @@ Uint32 frameStart, frameTime;
 int main(int argc, char* argv[])
 {
 	std::cout << "game init attempt...\n";
-	if (TheGame::Instance()->init("PP18.PauseState", 100, 100, 640, 480, false))
+	if (TheGame::Instance()->init("PP19.GameOverState", 100, 100, 640, 480, false))
 	{
 		
 		std::cout << "game init success!\n";

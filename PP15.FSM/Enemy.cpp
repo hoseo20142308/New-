@@ -2,6 +2,8 @@
 
 Enemy::Enemy(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
+	m_velocity.setX(0.001);
+	m_velocity.setY(2);
 }
 void Enemy::draw()
 {
@@ -14,13 +16,15 @@ void Enemy::update()
 	//m_velocity.setX(0);
 	//m_velocity.setY(0);
 
-	m_currentFrame = int(((SDL_GetTicks() / 100) % 6));
-
-	handleInput();
-	m_velocity.normalize();
-	m_velocity *= 10.0f;
-	m_position += m_velocity;
-
+	m_currentFrame = int(((SDL_GetTicks() / 100) % m_numFrames));
+	if (m_position.GetY() < 0) 
+	{
+		m_velocity.setY(2);
+	}
+	else if (m_position.GetY() > 400) 
+	{
+		m_velocity.setY(-2);
+	}
 	SDLGameObject::update();
 	
 }
