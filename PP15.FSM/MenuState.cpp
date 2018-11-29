@@ -8,23 +8,23 @@ const std::string MenuState::s_menuID = "MENU";
 
 MenuState* MenuState::s_pInstance = 0;
 
-void MenuState::update()
+/*void MenuState::update()
 {
 	// nothing for now
 	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->update();
 	}
-}
+}*/
 
-void MenuState::render()
+/*void MenuState::render()
 {
 	// nothing for now
 	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->draw();
 	}
-}
+}*/
 
 bool MenuState::onEnter()
 {

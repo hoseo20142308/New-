@@ -180,6 +180,10 @@ void InputHandler::onKeyUp()
 	m_keystates = SDL_GetKeyboardState(0);
 }
 
+void InputHandler::reset()
+{
+}
+
 Vector2D * InputHandler::GetMousePosition()
 {
 	return m_mousePosition;
