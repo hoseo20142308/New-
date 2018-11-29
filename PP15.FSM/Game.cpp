@@ -51,29 +51,13 @@ void Game::render()
 	// clear the renderer to the draw color
 	SDL_RenderClear(m_pRenderer);	
 	
-	/*for (std::vector<GameObject*>::size_type i = 0;
-		i != m_gameObjects.size(); i++)
-	{
-		m_gameObjects[i]->draw();
-	}*/
-
 	m_pGameStateMachine->render();
-
-
-
 
 	SDL_RenderPresent(m_pRenderer);	// 화면 제시하기
 }
 
 void Game::update()
 {
-
-	/*for (std::vector<GameObject*>::size_type i = 0;
-		i != m_gameObjects.size(); i++)
-	{
-		m_gameObjects[i]->update();
-	}*/
-
 	m_pGameStateMachine->update();
 }
 

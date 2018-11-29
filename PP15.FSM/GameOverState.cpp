@@ -8,6 +8,8 @@
 
 const std::string GameOverState::s_gameOverID = "GAMEOVER";
 
+GameOverState* GameOverState::s_pInstance = 0;
+
 
 void GameOverState::s_gameOverToMain()
 {
@@ -19,6 +21,19 @@ void GameOverState::s_restartPlay()
 	TheGame::Instance()->getStateMachine()->changeState(
 		PlayState::Instance());
 }
+
+/*void GameOverState::update()
+{
+	for (int i = 0; i < m_gameObjects.size(); i++)
+	{
+		m_gameObjects[i].update();
+	}
+}
+
+void GameOverState::render()
+{
+	
+}*/
 
 bool GameOverState::onEnter()
 {
@@ -51,7 +66,33 @@ bool GameOverState::onEnter()
 	m_gameObjects.push_back(gameOverText);
 	m_gameObjects.push_back(button1);
 	m_gameObjects.push_back(button2);
-	std::cout << "entering PauseState\n";
+	std::cout << "entering GameOverState\n";
 	return true;
 
+}
+
+bool GameOverState::onExit()
+{
+	for (int i = 0; i < m_gameObjects.size(); i++)
+	{
+		m_gameObjects[i]->clean();
+	}
+	m_gameObjects.clear();
+
+	TheTextureManager::Instance()->clearFromTextureMap("gameovertext");
+	TheTextureManager::Instance()->clearFromTextureMap("mainbutton");
+	TheTextureManager::Instance()->clearFromTextureMap("restartbutton");
+
+	std::cout << "exiting GameOverState\n";
+	return true;
+}
+
+GameOverState * GameOverState::Instance()
+{
+	if (s_pInstance == 0)
+	{
+		s_pInstance = new GameOverState();
+		return s_pInstance;
+	}
+	return s_pInstance;
 }

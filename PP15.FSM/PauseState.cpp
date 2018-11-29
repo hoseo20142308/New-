@@ -7,6 +7,8 @@
 
 const std::string PauseState::s_pauseID = "PAUSE";
 
+PauseState* PauseState::s_pInstance = 0;
+
 void PauseState::s_pauseToMain()
 {
 	TheGame::Instance()->getStateMachine()->changeState(
@@ -18,24 +20,23 @@ void PauseState::s_resumePlay()
 	TheGame::Instance()->getStateMachine()->popState();
 }
 
-/*void PauseState::update()
+void PauseState::update()
 {
+
 	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->update();
 	}
+}
 
-	GameState::update();
-}*/
-
-/*void PauseState::render()
+void PauseState::render()
 {
+
 	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->draw();
 	}
-	GameState::render();
-}*/
+}
 
 bool PauseState::onEnter()
 {
@@ -72,4 +73,16 @@ bool PauseState::onExit()
 	TheInputHandler::Instance()->reset();
 	std::cout << "exiting PauseState\n";
 	return true;
+}
+
+PauseState * PauseState::Instance()
+{
+
+	if (s_pInstance == 0)
+	{
+		s_pInstance = new PauseState();
+		return s_pInstance;
+	}
+	return s_pInstance;
+
 }

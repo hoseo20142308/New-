@@ -13,29 +13,6 @@ void MenuButton::draw()
 
 void MenuButton::update()
 {
-	/*SDLGameObject::update();
-
-	Vector2D* pMousePos = TheInputHandler::Instance()->GetMousePosition();
-	if (pMousePos->GetX() < (m_position.GetX() + m_width)
-		&& pMousePos->GetX() > m_position.GetX()
-		&& pMousePos->GetY() < (m_position.GetY() + m_height)
-		&& pMousePos->GetY() > m_position.GetY())
-	{
-		if (TheInputHandler::Instance()->getMouseButtonState(InputHandler::LEFT) && m_bReleased) 
-		{
-			m_currentFrame = CLICKED;
-			m_callback(); // call our callback function
-			m_bReleased = false;
-		}
-		else if (!TheInputHandler::Instance()->getMouseButtonState(InputHandler::LEFT)) 
-		{
-			m_bReleased = true;
-			m_currentFrame = MOUSE_OVER;
-		}
-	}
-	else {
-		m_currentFrame = MOUSE_OUT;
-	}*/
 
 	Vector2D* pMousePos = TheInputHandler::Instance()->GetMousePosition();
 

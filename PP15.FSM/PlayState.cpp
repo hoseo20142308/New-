@@ -9,21 +9,26 @@ PlayState* PlayState::s_pInstance = 0;
 
 void PlayState::update()
 {
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
+	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
-		TheGame::Instance()->getStateMachine()->changeState(
-			new PauseState());
-	}
-	for (int i = 0; i < m_gameObjects.size(); i++) {
 		m_gameObjects[i]->update();
 	}
+
 	if (checkCollision(
 		dynamic_cast<SDLGameObject*>(m_gameObjects[0]),
 		dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
 	{
 		TheGame::Instance()->getStateMachine()->changeState(
-			new GameOverState());
+			GameOverState::Instance());
 	}
+
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
+	{
+		TheGame::Instance()->getStateMachine()->changeState(
+			PauseState::Instance());
+	}
+	
+	
 }
 
 void PlayState::render()
@@ -51,7 +56,7 @@ bool PlayState::onEnter()
 
 
 	GameObject* player = new Player(new LoaderParams(100, 100, 128, 55, "helicopter"));
-	GameObject* enemy = new Enemy(new LoaderParams(100, 100, 128, 55, "helicopter2"));
+	GameObject* enemy = new Enemy(new LoaderParams(300, 100, 128, 55, "helicopter2"));
 	m_gameObjects.push_back(player);
 	m_gameObjects.push_back(enemy);
 	std::cout << "entering PlayState\n";
@@ -67,6 +72,7 @@ bool PlayState::onExit()
 	m_gameObjects.clear();
 
 	TheTextureManager::Instance()->clearFromTextureMap("helicopter");
+	TheTextureManager::Instance()->clearFromTextureMap("helicopter2");
 	std::cout << "exiting PlayState\n";
 	return true;
 }
