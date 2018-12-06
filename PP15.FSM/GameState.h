@@ -9,8 +9,9 @@
 class GameState
 {
 protected:
-	vector<GameObject*> m_gameObjects;
+	
 public:
+	vector<GameObject*> m_gameObjects;
 	virtual void update();
 	virtual void render();
 	virtual bool onEnter() = 0;

@@ -14,11 +14,11 @@ public:
 	bool load(std::string fileName, std::string id,
 		SDL_Renderer* pRenderer);
 
-	void draw(std::string id, int x, int y, int width, int height,
+	void draw(std::string id, int x, int y, int width, int height, int dst_width, int dst_height,
 		SDL_Renderer* pRenderer,
 		SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-	void drawFrame(std::string id, int x, int y, int width, int height,
+	void drawFrame(std::string id, int x, int y, int width, int height, int dst_width, int dst_height,
 		int currentRow, int currentFrame,
 		SDL_Renderer* pRenderer,
 		SDL_RendererFlip flip = SDL_FLIP_NONE);

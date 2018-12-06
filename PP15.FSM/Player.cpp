@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "PlayState.h"
+#include "Bullet.h"
 
 Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
@@ -37,8 +39,23 @@ void Player::handleInput()
 	{
 		m_velocity.setY(2);
 	}
+	if (TheInputHandler::Instance()->getMouseButtonState(InputHandler::LEFT))
+	{
+		shoot();
+	}
 
-	Vector2D* target = TheInputHandler::Instance()->GetMousePosition();
-	m_velocity = *target - m_position;
-	m_velocity /= 50;
+	//Vector2D* target = TheInputHandler::Instance()->GetMousePosition();
+	//m_velocity = *target - m_position;
+	//m_velocity /= 50;
+}
+
+void Player::shoot()
+{
+
+	GameObject* bullet = new Bullet(new LoaderParams(m_position.GetX() + m_dst_width / 2, m_position.GetY() + m_dst_height / 2, 12, 12, "bullet"));
+
+	PlayState::Instance()->m_gameObjects.push_back(bullet);
+	
+
+
 }

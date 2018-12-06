@@ -12,4 +12,5 @@ public:
 	virtual void clean() {};
 private:
 	void handleInput();
+	void shoot();
 };

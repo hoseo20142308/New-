@@ -12,8 +12,8 @@ public:
 	virtual void clean();
 
 	Vector2D& getPosition() { return m_position; }
-	int getWidth() { return m_width; }
-	int getHeight() { return m_height; }
+	int getWidth() { return m_dst_width; }
+	int getHeight() { return m_dst_height; }
 
 protected:
 	Vector2D m_position;
@@ -21,6 +21,8 @@ protected:
 	Vector2D m_acceleration;
 	int m_width;
 	int m_height;
+	int m_dst_width;
+	int m_dst_height;
 	int m_currentRow;
 	int m_currentFrame;
 	int m_numFrames;

@@ -53,9 +53,14 @@ bool PlayState::onEnter()
 	{
 		return false;
 	}
+	if (!TheTextureManager::Instance()->load("assets/bullet.png",
+		"bullet", TheGame::Instance()->getRenderer()))
+	{
+		return false;
+	}
 
 
-	GameObject* player = new Player(new LoaderParams(100, 100, 128, 55, "helicopter"));
+	GameObject* player = new Player(new LoaderParams(100, 100, 128, 55, 50, 30, "helicopter"));
 	GameObject* enemy = new Enemy(new LoaderParams(300, 100, 128, 55, "helicopter2"));
 	m_gameObjects.push_back(player);
 	m_gameObjects.push_back(enemy);
