@@ -61,6 +61,7 @@ void Player::shoot()
 		GameObject* bullet = new Bullet(new LoaderParams(m_position.GetX() + m_dst_width / 2, m_position.GetY() + m_dst_height / 2, 12, 12, "bullet"));
 
 		PlayState::Instance()->m_gameObjects.push_back(bullet);
+		PlayState::Instance()->list_Bullet.push_back(bullet);
 		shootTime = SDL_GetTicks();
 	}
 	

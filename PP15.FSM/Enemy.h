@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SDLGameObject.h"
-#include "InputHandler.h"
 
 class Enemy : public SDLGameObject
 {
@@ -11,5 +10,9 @@ public:
 	virtual void update();
 	virtual void clean() {};
 private:
-	void handleInput();
+	int HP = 3;
+	void checkCollision_to_Bullet();
+	bool checkCollision(SDLGameObject* coll);
+	void dead();
+
 };

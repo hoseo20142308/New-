@@ -15,6 +15,8 @@ public:
 	int getWidth() { return m_dst_width; }
 	int getHeight() { return m_dst_height; }
 
+	
+
 protected:
 	Vector2D m_position;
 	Vector2D m_velocity;
@@ -26,6 +28,5 @@ protected:
 	int m_currentRow;
 	int m_currentFrame;
 	int m_numFrames;
-
 	std::string m_textureID;
 };

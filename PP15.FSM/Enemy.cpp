@@ -1,10 +1,14 @@
 #include "Enemy.h"
+#include "PlayState.h"
+#include "Player.h"
 
 Enemy::Enemy(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
-	m_velocity.setX(0.001);
-	m_velocity.setY(2);
 	m_numFrames = 1;
+	SDLGameObject* tempPlayer = dynamic_cast<SDLGameObject*>(PlayState::Instance()->list_Player[0]);
+	m_velocity = tempPlayer->getPosition() - m_position;
+	m_velocity.normalize();
+	m_velocity *= 5;
 }
 void Enemy::draw()
 {
@@ -13,27 +17,60 @@ void Enemy::draw()
 void Enemy::update()
 {
 	m_currentFrame = int(((SDL_GetTicks() / 100) % m_numFrames));
-	if (m_position.GetY() < 0) 
-	{
-		m_velocity.setY(2);
-	}
-	else if (m_position.GetY() > 400) 
-	{
-		m_velocity.setY(-2);
-	}
+
+	checkCollision_to_Bullet();
+
+	dead();
+
 	SDLGameObject::update();
-	
+
 }
 
-void Enemy::handleInput()
+void Enemy::checkCollision_to_Bullet()
 {
-	/*if (TheInputHandler::Instance()->getMouseButtonState(InputHandler::LEFT))
+	for (int i = 0; i < PlayState::Instance()->list_Bullet.size(); i++)
 	{
-		m_velocity.setX(0);
+		if (checkCollision(dynamic_cast<SDLGameObject*>(PlayState::Instance()->list_Bullet[i])))
+		{
+			std::cout << "CollisionCheck.Enemy_to_Bullet\n";
+			PlayState::Instance()->list_Bullet[i]->setActive(false);
+			HP--;
+		}
 	}
+}
 
-	Vector2D* vec = TheInputHandler::Instance()->GetMousePosition();
-	m_velocity = (*vec - m_position) / 100;*/
+bool Enemy::checkCollision(SDLGameObject * coll)
+{
+	int leftA, leftB;
+	int rightA, rightB;
+	int topA, topB;
+	int bottomA, bottomB;
 
+	leftA = m_position.GetX();
+	rightA = m_position.GetX() + m_dst_width;
+	topA = m_position.GetY();
+	bottomA = m_position.GetY() + m_dst_height;
 
+	//Calculate the sides of rect B
+	leftB = coll->getPosition().GetX();
+	rightB = coll->getPosition().GetX() + coll->getWidth();
+	topB = coll->getPosition().GetY();
+	bottomB = coll->getPosition().GetY() + coll->getHeight();
+
+	//If any of the sides from A are outside of B
+	if (bottomA <= topB) { return false; }
+	if (topA >= bottomB) { return false; }
+	if (rightA <= leftB) { return false; }
+	if (leftA >= rightB) { return false; }
+	return true;
+}
+
+void Enemy::dead()
+{
+	if (HP <= 0)
+	{
+		active = false;
+
+		cout << "enemy dead!\n";
+	}
 }

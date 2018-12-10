@@ -9,18 +9,21 @@ PlayState* PlayState::s_pInstance = 0;
 
 void PlayState::update()
 {
+	GameManager::Instance()->update();
 	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->update();
 	}
 
-	if (checkCollision(
+	/*if (checkCollision(
 		dynamic_cast<SDLGameObject*>(m_gameObjects[0]),
 		dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
 	{
 		TheGame::Instance()->getStateMachine()->changeState(
 			GameOverState::Instance());
-	}
+	}*/
+
+	pop_vector();
 
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
 	{
@@ -33,7 +36,6 @@ void PlayState::update()
 
 void PlayState::render()
 {
-	// nothing for now
 	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->draw();
@@ -60,21 +62,43 @@ bool PlayState::onEnter()
 	}
 
 
+
 	GameObject* player = new Player(new LoaderParams(100, 100, 128, 55, 50, 30, "helicopter"));
-	GameObject* enemy = new Enemy(new LoaderParams(300, 100, 128, 55, "helicopter2"));
+	
 	m_gameObjects.push_back(player);
-	m_gameObjects.push_back(enemy);
+	list_Player.push_back(player);
+
 	std::cout << "entering PlayState\n";
 	return true;
 }
 
 bool PlayState::onExit()
 {
+	for (int i = 0; i < list_Player.size(); i++)
+	{
+		list_Player[i]->clean();
+	}
+	list_Player.clear();
+
+	for (int i = 0; i < list_Enemy.size(); i++)
+	{
+		list_Enemy[i]->clean();
+	}
+	list_Enemy.clear();
+
+	for (int i = 0; i < list_Bullet.size(); i++)
+	{
+		list_Bullet[i]->clean();
+	}
+	list_Bullet.clear();
+
 	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->clean();
 	}
 	m_gameObjects.clear();
+
+
 
 	TheTextureManager::Instance()->clearFromTextureMap("helicopter");
 	TheTextureManager::Instance()->clearFromTextureMap("helicopter2");
@@ -90,6 +114,82 @@ PlayState * PlayState::Instance()
 		return s_pInstance;
 	}
 	return s_pInstance;
+}
+
+void PlayState::pop_vector()
+{
+	GameObject* tempO;
+	// 플레이어 게임오브젝트 비활성화 검사
+	if (list_Player.size() >= 1)
+	{
+		for (int i = 0; i < list_Player.size(); i++)
+		{
+			if (!list_Player[i]->getActive())
+			{
+				if (i == list_Player.size())
+					break;
+				tempO = list_Player[i];
+				list_Player[i] = list_Player[i + 1];
+				list_Player[i + 1] = tempO;
+			}
+		}
+		if (!list_Player[list_Player.size() - 1]->getActive())
+			list_Player.pop_back();
+	}
+
+	// 적 게임오브젝트 비활성화 검사
+	if (list_Enemy.size() >= 1)
+	{
+		for (int i = 0; i < list_Enemy.size(); i++)
+		{
+			if (!list_Enemy[i]->getActive())
+			{
+				if (i == list_Enemy.size() - 1)
+					break;
+				tempO = list_Enemy[i];
+				list_Enemy[i] = list_Enemy[i + 1];
+				list_Enemy[i + 1] = tempO;
+			}
+		}
+		if (!list_Enemy[list_Enemy.size() - 1]->getActive())
+			list_Enemy.pop_back();
+	}
+
+	// 총알 게임오브젝트 비활성화 검사
+	if (list_Bullet.size() >= 1)
+	{
+		for (int i = 0; i < list_Bullet.size(); i++)
+		{
+			if (!list_Bullet[i]->getActive())
+			{
+				if (i == list_Bullet.size() - 1)
+					break;
+				tempO = list_Bullet[i];
+				list_Bullet[i] = list_Bullet[i + 1];
+				list_Bullet[i + 1] = tempO;
+			}
+		}
+		if (!list_Bullet[list_Bullet.size() - 1]->getActive())
+			list_Bullet.pop_back();
+	}
+
+	// 모든 게임 오브젝트 비활성화 검사
+	if (m_gameObjects.size() >= 1)
+	{
+		for (int i = 0; i < m_gameObjects.size(); i++)
+		{
+			if (!m_gameObjects[i]->getActive())
+			{
+				if (i == m_gameObjects.size() - 1)
+					break;
+				tempO = m_gameObjects[i];
+				m_gameObjects[i] = m_gameObjects[i + 1];
+				m_gameObjects[i + 1] = tempO;
+			}
+		}
+		if (!m_gameObjects[m_gameObjects.size() - 1]->getActive())
+			m_gameObjects.pop_back();
+	}
 }
 
 bool PlayState::checkCollision(SDLGameObject* p1, SDLGameObject* p2)
