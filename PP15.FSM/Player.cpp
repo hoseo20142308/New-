@@ -2,8 +2,11 @@
 #include "PlayState.h"
 #include "Bullet.h"
 
+
+
 Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
+	Player::shootTime = SDL_GetTicks();
 }
 void Player::draw()
 {
@@ -41,7 +44,7 @@ void Player::handleInput()
 	}
 	if (TheInputHandler::Instance()->getMouseButtonState(InputHandler::LEFT))
 	{
-		shoot();
+			shoot();
 	}
 
 	//Vector2D* target = TheInputHandler::Instance()->GetMousePosition();
@@ -52,9 +55,14 @@ void Player::handleInput()
 void Player::shoot()
 {
 
-	GameObject* bullet = new Bullet(new LoaderParams(m_position.GetX() + m_dst_width / 2, m_position.GetY() + m_dst_height / 2, 12, 12, "bullet"));
+	inputTime = SDL_GetTicks();
+	if (inputTime - shootTime > delay_Shoot)
+	{
+		GameObject* bullet = new Bullet(new LoaderParams(m_position.GetX() + m_dst_width / 2, m_position.GetY() + m_dst_height / 2, 12, 12, "bullet"));
 
-	PlayState::Instance()->m_gameObjects.push_back(bullet);
+		PlayState::Instance()->m_gameObjects.push_back(bullet);
+		shootTime = SDL_GetTicks();
+	}
 	
 
 

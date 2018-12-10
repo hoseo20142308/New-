@@ -11,6 +11,8 @@ public:
 	virtual void update();
 	virtual void clean() {};
 private:
+	Uint32 inputTime, shootTime;
+	float delay_Shoot = 500.0f;
 	void handleInput();
 	void shoot();
 };
