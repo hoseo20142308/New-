@@ -8,3 +8,19 @@ Bullet::Bullet(const LoaderParams * pParams) : SDLGameObject(pParams)
 	m_velocity.normalize();
 	m_velocity *= 5;
 }
+
+void Bullet::update()
+{
+	mapoutCheck();
+
+	SDLGameObject::update();
+}
+
+void Bullet::mapoutCheck()
+{
+	if ((m_position.GetX() < -50
+		|| m_position.GetX() > 650) &&
+		(m_position.GetY() < -50
+			|| m_position.GetY() > 490))
+		active = false;
+}

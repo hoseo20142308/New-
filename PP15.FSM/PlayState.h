@@ -16,9 +16,10 @@ public:
 
 	static PlayState* Instance();
 
+
 	// 게임오브젝트 별 배열
 	vector<GameObject*> list_Player;		// 플레이어 헬기 게임오브젝트 배열
-	vector<GameObject*> list_Enemy;		// 적 헬기 게임오브젝트 배열
+	vector<GameObject*> list_Enemy;			// 적 헬기 게임오브젝트 배열
 	vector<GameObject*> list_Bullet;		// 총알 게임오브젝트 배열
 
 private:

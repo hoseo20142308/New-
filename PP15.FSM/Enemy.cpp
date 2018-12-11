@@ -20,6 +20,8 @@ void Enemy::update()
 
 	checkCollision_to_Bullet();
 
+	mapoutCheck();
+
 	dead();
 
 	SDLGameObject::update();
@@ -73,4 +75,13 @@ void Enemy::dead()
 
 		cout << "enemy dead!\n";
 	}
+}
+
+void Enemy::mapoutCheck()
+{
+	if ((m_position.GetX() < -300
+		|| m_position.GetX() > 1000) &&
+		(m_position.GetY() < -300
+			|| m_position.GetY() > 1000))
+		active = false;
 }

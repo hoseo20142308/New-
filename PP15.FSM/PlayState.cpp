@@ -44,6 +44,11 @@ void PlayState::render()
 
 bool PlayState::onEnter()
 {
+	if (!TheTextureManager::Instance()->load("assets/Sky.png",
+		"background", TheGame::Instance()->getRenderer()))
+	{
+		return false;
+	}
 	if (!TheTextureManager::Instance()->load(
 		"assets/helicopter.png", "helicopter",
 		TheGame::Instance()->getRenderer()))
@@ -61,7 +66,8 @@ bool PlayState::onEnter()
 		return false;
 	}
 
-
+	GameObject* background = new SDLGameObject(new LoaderParams(0, 0, 816, 816, 640, 480, "background"));
+	m_gameObjects.push_back(background);
 
 	GameObject* player = new Player(new LoaderParams(100, 100, 128, 55, 50, 30, "helicopter"));
 	

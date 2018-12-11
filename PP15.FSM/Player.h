@@ -12,7 +12,7 @@ public:
 	virtual void clean() {};
 private:
 	Uint32 inputTime, shootTime;
-	float delay_Shoot = 500.0f;
+	float delay_Shoot = 200.0f;
 	void handleInput();
 	void shoot();
 };

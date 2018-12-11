@@ -14,5 +14,6 @@ private:
 	void checkCollision_to_Bullet();
 	bool checkCollision(SDLGameObject* coll);
 	void dead();
+	void mapoutCheck();
 
 };

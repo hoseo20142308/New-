@@ -8,6 +8,7 @@ void GameState::update()
 	}
 }
 
+
 void GameState::render()
 {
 	for (int i = 0; i < m_gameObjects.size(); i++)

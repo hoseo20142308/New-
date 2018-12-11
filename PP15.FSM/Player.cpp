@@ -54,7 +54,6 @@ void Player::handleInput()
 
 void Player::shoot()
 {
-
 	inputTime = SDL_GetTicks();
 	if (inputTime - shootTime > delay_Shoot)
 	{
@@ -64,7 +63,4 @@ void Player::shoot()
 		PlayState::Instance()->list_Bullet.push_back(bullet);
 		shootTime = SDL_GetTicks();
 	}
-	
-
-
 }
