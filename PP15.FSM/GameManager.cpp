@@ -3,6 +3,8 @@
 #include <ctime>
 #include <random>
 #include "Enemy.h"
+#include "Game.h"
+#include "GameOverState.h"
 
 GameManager* GameManager::s_pInstance = 0;
 
@@ -22,6 +24,8 @@ void GameManager::Enemy_1_Spawn()
 
 		PlayState::Instance()->m_gameObjects.push_back(enemy);
 		PlayState::Instance()->list_Enemy.push_back(enemy);
+
+		delay_Enemy_1_Spawn -= 10.0f;
 	}
 
 }
@@ -36,6 +40,8 @@ void GameManager::Enemy_2_Spawn()
 
 		PlayState::Instance()->m_gameObjects.push_back(enemy);
 		PlayState::Instance()->list_Enemy.push_back(enemy);
+
+		delay_Enemy_2_Spawn -= 5.0f;
 	}
 }
 
@@ -90,12 +96,29 @@ Vector2D GameManager::setRandomPos()
 	return position;
 }
 
+void GameManager::check_GameOver()
+{
+	if (PlayState::Instance()->list_Player.size() <= 0)
+	{
+		deadTimer = SDL_GetTicks();
+
+		if (deadTimer - deadTime > delay_Enter_GameOverState)
+		{
+			TheGame::Instance()->Instance()->getStateMachine()->changeState(GameOverState::Instance());
+		}
+	}
+
+	
+}
+
 void GameManager::update()
 {
 	Timer = SDL_GetTicks();
 
 	Enemy_1_Spawn();
 	Enemy_2_Spawn();
+
+	check_GameOver();
 }
 
 GameManager * GameManager::Instance()
@@ -106,6 +129,12 @@ GameManager * GameManager::Instance()
 		return s_pInstance;
 	}
 	return s_pInstance;
+}
+
+void GameManager::Init()
+{
+	spawnTime1 = SDL_GetTicks();
+	spawnTime2 = SDL_GetTicks();
 }
 
 

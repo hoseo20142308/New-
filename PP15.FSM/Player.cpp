@@ -78,6 +78,7 @@ void Player::collisionCheck_to_Enemy()
 		{
 			std::cout << "CollisionCheck.Player_to_Enemy\n";
 			this->setActive(false);
+			GameManager::Instance()->deadTime = SDL_GetTicks();
 			GameObject* effect = new Effect(new LoaderParams(m_position.GetX() - 50, m_position.GetY() - 50, 192, 192, "explosion"), 12, false);
 			PlayState::Instance()->m_gameObjects.push_back(effect);
 		}

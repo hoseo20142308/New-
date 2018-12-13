@@ -10,18 +10,13 @@ PlayState* PlayState::s_pInstance = 0;
 void PlayState::update()
 {
 	GameManager::Instance()->update();
+
 	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->update();
 	}
 
-	/*if (checkCollision(
-		dynamic_cast<SDLGameObject*>(m_gameObjects[0]),
-		dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
-	{
-		TheGame::Instance()->getStateMachine()->changeState(
-			GameOverState::Instance());
-	}*/
+
 
 	pop_vector();
 
@@ -84,6 +79,8 @@ bool PlayState::onEnter()
 	m_gameObjects.push_back(player);
 	list_Player.push_back(player);
 
+	GameManager::Instance()->Init();
+
 	std::cout << "entering PlayState\n";
 	return true;
 }
@@ -116,8 +113,12 @@ bool PlayState::onExit()
 
 
 
+	TheTextureManager::Instance()->clearFromTextureMap("background");
 	TheTextureManager::Instance()->clearFromTextureMap("helicopter");
 	TheTextureManager::Instance()->clearFromTextureMap("helicopter2");
+	TheTextureManager::Instance()->clearFromTextureMap("helicopter3");
+	TheTextureManager::Instance()->clearFromTextureMap("bullet");
+	TheTextureManager::Instance()->clearFromTextureMap("explosion");
 	std::cout << "exiting PlayState\n";
 	return true;
 }
