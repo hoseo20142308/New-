@@ -8,16 +8,17 @@ GameManager* GameManager::s_pInstance = 0;
 
 GameManager::GameManager()
 {
-	startTime = SDL_GetTicks();
+	spawnTime1 = SDL_GetTicks();
+	spawnTime2 = SDL_GetTicks();
 }
 
 void GameManager::Enemy_1_Spawn()
 {	
-	if ((Timer - startTime) > delay_Enemy_1_Spawn)
+	if ((Timer - spawnTime1) > delay_Enemy_1_Spawn)
 	{
 		Vector2D Pos = setRandomPos();
-		startTime = SDL_GetTicks();
-		GameObject* enemy = new Enemy(new LoaderParams(Pos.GetX(), Pos.GetY(), 128, 55, 50, 30, "helicopter2"));
+		spawnTime1 = SDL_GetTicks();
+		GameObject* enemy = new Enemy(new LoaderParams(Pos.GetX(), Pos.GetY(), 128, 55, 60, 30, "helicopter2"), 1);
 
 		PlayState::Instance()->m_gameObjects.push_back(enemy);
 		PlayState::Instance()->list_Enemy.push_back(enemy);
@@ -27,7 +28,15 @@ void GameManager::Enemy_1_Spawn()
 
 void GameManager::Enemy_2_Spawn()
 {
-	Vector2D Pos = setRandomPos();
+	if ((Timer - spawnTime2) > delay_Enemy_2_Spawn)
+	{
+		Vector2D Pos = setRandomPos();
+		spawnTime2 = SDL_GetTicks();
+		GameObject* enemy = new Enemy(new LoaderParams(Pos.GetX(), Pos.GetY(), 128, 55, 60, 30, "helicopter3"), 2);
+
+		PlayState::Instance()->m_gameObjects.push_back(enemy);
+		PlayState::Instance()->list_Enemy.push_back(enemy);
+	}
 }
 
 int GameManager::getRandomNumber(int min, int max)
@@ -86,7 +95,7 @@ void GameManager::update()
 	Timer = SDL_GetTicks();
 
 	Enemy_1_Spawn();
-	//Enemy_2_Spawn();
+	Enemy_2_Spawn();
 }
 
 GameManager * GameManager::Instance()

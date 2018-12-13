@@ -60,8 +60,18 @@ bool PlayState::onEnter()
 	{
 		return false;
 	}
+	if (!TheTextureManager::Instance()->load("assets/helicopter3.png",
+		"helicopter3", TheGame::Instance()->getRenderer()))
+	{
+		return false;
+	}
 	if (!TheTextureManager::Instance()->load("assets/bullet.png",
 		"bullet", TheGame::Instance()->getRenderer()))
+	{
+		return false;
+	}
+	if (!TheTextureManager::Instance()->load("assets/explosion.png",
+		"explosion", TheGame::Instance()->getRenderer()))
 	{
 		return false;
 	}
@@ -132,7 +142,7 @@ void PlayState::pop_vector()
 		{
 			if (!list_Player[i]->getActive())
 			{
-				if (i == list_Player.size())
+				if (i == list_Player.size() - 1)
 					break;
 				tempO = list_Player[i];
 				list_Player[i] = list_Player[i + 1];

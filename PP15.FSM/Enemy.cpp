@@ -2,13 +2,17 @@
 #include "PlayState.h"
 #include "Player.h"
 
-Enemy::Enemy(const LoaderParams* pParams) : SDLGameObject(pParams)
+Enemy::Enemy(const LoaderParams* pParams, int type) : SDLGameObject(pParams)
 {
-	m_numFrames = 1;
-	SDLGameObject* tempPlayer = dynamic_cast<SDLGameObject*>(PlayState::Instance()->list_Player[0]);
-	m_velocity = tempPlayer->getPosition() - m_position;
-	m_velocity.normalize();
-	m_velocity *= 5;
+	e_Type = type;
+	m_numFrames = 5;
+	if (PlayState::Instance()->list_Player.size() >= 1)
+	{
+		tempPlayer = dynamic_cast<SDLGameObject*>(PlayState::Instance()->list_Player[0]);
+		m_velocity = tempPlayer->getPosition() - m_position;
+		m_velocity.normalize();
+		m_velocity *= 5;
+	}
 }
 void Enemy::draw()
 {
@@ -17,6 +21,8 @@ void Enemy::draw()
 void Enemy::update()
 {
 	m_currentFrame = int(((SDL_GetTicks() / 100) % m_numFrames));
+
+	trace();
 
 	checkCollision_to_Bullet();
 
@@ -84,4 +90,18 @@ void Enemy::mapoutCheck()
 		(m_position.GetY() < -300
 			|| m_position.GetY() > 1000))
 		active = false;
+}
+
+void Enemy::trace()
+{
+	if (e_Type == 2)
+	{
+		if (PlayState::Instance()->list_Player.size() >= 1)
+		{
+			tempPlayer = dynamic_cast<SDLGameObject*>(PlayState::Instance()->list_Player[0]);
+			m_velocity = tempPlayer->getPosition() - m_position;
+			m_velocity.normalize();
+			m_velocity *= 5;
+		}
+	}
 }

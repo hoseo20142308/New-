@@ -20,14 +20,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 		m_bRunning = true;
 
-		SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
-
-		//m_textureManager.load("Assets/animate-alpha.png", "animate", m_pRenderer);
-		if (!TheTextureManager::Instance()->load("assets/animate-alpha.png",
-			"animate", m_pRenderer))
-		{
-			return false;
-		}
+		SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
 
 
 	}

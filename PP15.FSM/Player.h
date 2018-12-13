@@ -11,8 +11,11 @@ public:
 	virtual void update();
 	virtual void clean() {};
 private:
+	float speed = 5.0f;
 	Uint32 inputTime, shootTime;
 	float delay_Shoot = 200.0f;
 	void handleInput();
 	void shoot();
+	void collisionCheck_to_Enemy();
+	bool checkCollision(SDLGameObject* coll);
 };

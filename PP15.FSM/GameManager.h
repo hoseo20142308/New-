@@ -13,9 +13,9 @@ private:
 	GameManager();
 	static GameManager* s_pInstance;
 
-	Uint32 startTime, Timer;
-	float delay_Enemy_1_Spawn = 1000.0f;
-	float delay_Enemy_2_Spawn = 5000.0f;
+	Uint32 spawnTime1, spawnTime2, Timer;
+	float delay_Enemy_1_Spawn = 3000.0f;
+	float delay_Enemy_2_Spawn = 10000.0f;
 
 	void Enemy_1_Spawn();
 	void Enemy_2_Spawn();
