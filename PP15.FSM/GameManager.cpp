@@ -25,7 +25,8 @@ void GameManager::Enemy_1_Spawn()
 		PlayState::Instance()->m_gameObjects.push_back(enemy);
 		PlayState::Instance()->list_Enemy.push_back(enemy);
 
-		delay_Enemy_1_Spawn -= 10.0f;
+		delay_Enemy_1_Spawn -= 100.0f;
+		if (delay_Enemy_1_Spawn < 1000.0f) delay_Enemy_1_Spawn = 1000.0f;
 	}
 
 }
@@ -41,7 +42,8 @@ void GameManager::Enemy_2_Spawn()
 		PlayState::Instance()->m_gameObjects.push_back(enemy);
 		PlayState::Instance()->list_Enemy.push_back(enemy);
 
-		delay_Enemy_2_Spawn -= 5.0f;
+		delay_Enemy_2_Spawn -= 50.0f;
+		if (delay_Enemy_2_Spawn < 3000.0f) delay_Enemy_2_Spawn = 3000.0f;
 	}
 }
 
